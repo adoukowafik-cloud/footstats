@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="FootStats — Statistiques football en temps réel"/>
+  <title>FootStats — Statistiques Football</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo" onclick="nav('players')">Foot<em>Stats</em></div>
+  <ul class="nav-links">
+    <li><a id="nl-players" class="active" onclick="nav('players')">Joueurs</a></li>
+    <li><a id="nl-scorers" onclick="nav('scorers')">Classement</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE JOUEURS -->
+<div class="page active" id="pg-players">
+  <div class="hero">
+    <span class="eyebrow">⚽ Profil joueur</span>
+    <h1>Statistiques<br><span>après chaque match</span></h1>
+    <p>Recherche un joueur pour ses stats complètes · Saison 2024/25</p>
+    <div class="sf">
+      <input type="text" id="psearch" placeholder="Salah, Mbappé, Haaland..." onkeydown="if(event.key==='Enter') searchPlayer()"/>
+      <button onclick="searchPlayer()">Rechercher</button>
+    </div>
+  </div>
+  <div class="ctn">
+    <div class="empty" id="p-empty">
+      <div class="ei">🔍</div>
+      <p>Tape le nom d'un joueur pour afficher son profil et ses statistiques complètes.</p>
+    </div>
+    <div class="sload" id="p-load"><div class="spin"></div><span>Récupération des données...</span></div>
+    <div class="serr" id="p-err">⚠️ <span id="p-errmsg"></span></div>
+    <div class="pcard" id="p-card">
+      <div class="ptop">
+        <div class="pav" id="p-av">⚽</div>
+        <div>
+          <div class="pbadge" id="p-pos">ATT</div>
+          <div class="pname" id="p-name">—</div>
+          <div class="pmeta">
+            <span class="pill">🏳️ <strong id="p-nat">—</strong></span>
+            <span class="pill">🎂 <strong id="p-age">—</strong></span>
+            <span class="pill">⚽ <strong id="p-team">—</strong></span>
+            <span class="pill">🏆 <strong id="p-league">—</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="tabs">
+        <button class="tbtn on" onclick="stab('t-stats', this)">Statistiques saison</button>
+        <button class="tbtn" onclick="stab('t-matches', this)">Derniers matchs</button>
+      </div>
+      <div class="tp on" id="t-stats">
+        <div class="sh2"><span class="st">Saison 2024 / 25</span><span class="sl"></span></div>
+        <div class="sgrid" id="p-grid"></div>
+      </div>
+      <div class="tp" id="t-matches">
+        <div class="sh2"><span class="st">10 derniers matchs</span><span class="sl"></span></div>
+        <div id="p-mlist"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE CLASSEMENT -->
+<div class="page" id="pg-scorers">
+  <div class="schero">
+    <span class="eyebrow">🏆 Classement</span>
+    <h1>Meilleurs buteurs 2024/25</h1>
+    <p>Top 20 par championnat · Données en temps réel</p>
+  </div>
+  <div class="ctn">
+    <div class="fbar" id="fbar"></div>
+    <div class="sload" id="sc-load"><div class="spin"></div><span>Chargement du classement...</span></div>
+    <div class="serr" id="sc-err">⚠️ <span id="sc-errmsg"></span></div>
+    <div id="sc-res" style="display:none">
+      <div class="stable">
+        <div class="thead">
+          <span>#</span>
+          <span>Joueur</span>
+          <span style="text-align:center">⚽ Buts</span>
+          <span style="text-align:center">🅰️ Assists</span>
+          <span style="text-align:center">🎮 Matchs</span>
+        </div>
+        <div id="sc-body"></div>
+      </div>
+      <p style="text-align:center;color:var(--muted);font-size:.78rem;margin-top:1.25rem;padding-bottom:2rem">
+        Données fournies par API-Football · Saison 2024/25
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="js/app.js"></script>
+</body>
+</html>
